@@ -1,7 +1,7 @@
 {
-  "name": "backend",
+  "name": "overwatch-collegiate-hub",
   "version": "1.0.0",
-  "description": "Overwatch Collegiate Hub Backend",
+  "description": "Backend API for Overwatch Collegiate Hub MVP",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
