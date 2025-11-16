@@ -43,6 +43,6 @@ The MVP proves the concept works and sets the foundation for additional features
 ### Local Setup
 1. Clone the repository:
 ```bash
-git clone https://github.com/<your-username>/overwatch-collegiate-hub.git
+git clone https://github.com/GhoulURG/overwatch-collegiate-hub.git
 cd overwatch-collegiate-hub
 
