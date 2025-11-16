@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function App() {
+  const [standings, setStandings] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/standings")
+      .then((res) => res.json())
+      .then((data) => setStandings(data));
+  }, []);
+
   return (
     <div>
       <h1>Overwatch Collegiate Hub - MVP</h1>
@@ -14,16 +22,13 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Team Alpha</td>
-            <td>3</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>Team Beta</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
+          {standings.map((team, index) => (
+            <tr key={index}>
+              <td>{team.team}</td>
+              <td>{team.wins}</td>
+              <td>{team.losses}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
