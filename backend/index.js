@@ -1,25 +1,17 @@
+require("dotenv").config();
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
 
-const app = express();
-const PORT = process.env.PORT || 5000;
+const authRoutes = require("./routes/auth");
 
+const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Sample API endpoint for standings
-app.get("/api/standings", (req, res) => {
-  res.json([
-    { team: "Team Alpha", wins: 3, losses: 1 },
-    { team: "Team Beta", wins: 2, losses: 2 }
-  ]);
-});
+app.use("/api/auth", authRoutes);
 
-// Default route
-app.get("/", (req, res) => {
-  res.send("Overwatch Collegiate Hub Backend is running!");
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 5000;
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => app.listen(PORT, () => console.log(`Server running on port ${PORT}`)))
+  .catch(err => console.log(err));
