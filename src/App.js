@@ -1,37 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 
 function App() {
-  const [standings, setStandings] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:5000/api/standings")
-      .then((res) => res.json())
-      .then((data) => setStandings(data));
-  }, []);
-
   return (
-    <div>
-      <h1>Overwatch Collegiate Hub - MVP</h1>
-      <h2>Standings</h2>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Team</th>
-            <th>Wins</th>
-            <th>Losses</th>
-          </tr>
-        </thead>
-        <tbody>
-          {standings.map((team, index) => (
-            <tr key={index}>
-              <td>{team.team}</td>
-              <td>{team.wins}</td>
-              <td>{team.losses}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </Router>
   );
 }
 
