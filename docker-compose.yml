@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    container_name: overwatch-backend
+    ports:
+      - "5001:5000"       # host port 5001 → container port 5000
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./frontend
+    container_name: overwatch-frontend
+    ports:
+      - "3001:80"         # host port 3001 → container port 80
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo
+    container_name: overwatch-db
+    restart: always
+    ports:
+      - "27017:27017"     # host port 27017 → container port 27017
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
